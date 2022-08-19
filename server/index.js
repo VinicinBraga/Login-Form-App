@@ -1,16 +1,18 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
 
 const port = 3001;
+const user = process.env.user;
+const password = process.env.password;
+const database = process.env.database;
 
 const db = mysql.createPool({
   host: "localhost",
-  user: "vinicin",
-  password: "08003484",
-  database: "user_data_base",
+  user: user,
+  password: password,
+  database: database,
 });
-
-app.get("/", (req, res) => res.send("Hello World!"));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
