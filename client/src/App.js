@@ -1,14 +1,22 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
+
 import "./App.css";
+
 import Register from "./components/Register";
+import Axios from "axios";
 
 function App() {
   const [register, setRegister] = useState(false);
 
-  const handleClickLogin = (e) => {
-    console.log(e);
+  const handleClickLogin = (values) => {
+    Axios.post("http://localhost:3001/login", {
+      email: values.email,
+      password: values.password,
+    }).then((response) => {
+      console.log(response);
+    });
   };
 
   const validationLogin = yup.object().shape({
