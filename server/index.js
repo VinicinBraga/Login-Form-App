@@ -45,4 +45,23 @@ app.post("/register", (req, res) => {
   });
 });
 
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  db.query(
+    "SELECT * FROM users WHERE email = ? AND password =?",
+    [email, password],
+    (err, result) => {
+      if (err) {
+        req.send(err);
+      }
+      if (result.length > 0) {
+        res.send({ msg: "User Logged in" });
+      } else {
+        res.send({ msg: "User not found" });
+      }
+    }
+  );
+});
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
